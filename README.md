@@ -104,50 +104,66 @@
 
 ![Скриншот 13](images/13.png)
 
-Рисунок 13 - 
+Рисунок 13 - Инициализация изображений и метод слайдшоу
 
 ![Скриншот 14](images/14.png)
 
-Рисунок 14 - Кнопка регистрации
+Рисунок 14 - Инициализация кнопок и слушателей
 
 ![Скриншот 16](images/16.png)
 
-Рисунок 15 - Валидация ФИО/Логина/Телефона/Email
+Рисунок 15 - Перелистывание изображений
 
 ![Скриншот 17](images/17.png)
 
-Рисунок 16 - Валидация пароля/Даты/Спинера
+Рисунок 16 - Настройка слайдшоу
 
 ![Скриншот 15](images/15.png)
 
-Рисунок 17 - Чекбокс и проверка на соблюдение всех условий
+Рисунок 17 - Настройка громкости в VideoActivity
 
 ![Скриншот 18](images/18.png)
 
-Рисунок 18 - Окно регистрации
+Рисунок 18 - Подготовка и обработка видео
 
 ![Скриншот 19](images/19.png)
 
-Рисунок 19 - Успешная регистрация
+Рисунок 19 - Пауза и продолжение аудио при просмотре видео
 
 ![Скриншот 20](images/20.png)
 
-Рисунок 20 - Ошибка пароля
+Рисунок 20 - Зацикливание аудио и проверка на видео
 
 ![Скриншот 21](images/21.png)
 
-Рисунок 21 - Вывод в Logcat
-
-## Индивидуальное задание
+Рисунок 21 - Методы для воспроизведения аудио и проверка на воспроизведение
 
 ![Скриншот 22](images/22.png)
 
-Рисунок 22 - Вывод списка и переход к регистрации
+Рисунок 22 - Настройка Manifests
 
 ![Скриншот 23](images/23.png)
 
-Рисунок 23 - Валидация номера и Email
+Рисунок 23 - Главный экран
 
 ![Скриншот 24](images/24.png)
 
-Рисунок 24 - Валидация спинера и чекбокса
+Рисунок 24 - Галерея
+
+![Скриншот 25](images/25.png)
+
+Рисунок 25 - Видеоплеер
+## Контрольные вопросы:
+1. Типы ресурсов: drawable (изображения, формы), raw (сырые файлы, например, аудио), values (строки, цвета, размеры, стили).
+2. Добавить изображение в ImageView:
+Из ресурсов: imageView.setImageResource(R.drawable.my_image);
+Из файловой системы: imageView.setImageBitmap(BitmapFactory.decodeFile("/sdcard/image.png"));
+3. Жизненный цикл MediaPlayer: Создание → setDataSource() → prepare() → start() → pause/stop → release(). Для файла из ресурсов: MediaPlayer.create(context, R.raw.sound) (объединяет подготовку) → start().
+4. AudioManager: Управление громкостью и режимами звука. Получение: (AudioManager) getSystemService(Context.AUDIO_SERVICE). Изменить громкость: audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, value, 0);
+5. VideoView + MediaController: VideoView — виджет для видео. MediaController — панель управления. Связка: mediaController.setAnchorView(videoView); videoView.setMediaController(mediaController); videoView.setVideoPath(path); videoView.start();
+6. runOnUiThread() в TimerTask: Таймер работает в фоновом потоке, а UI обновляется только из главного потока. runOnUiThread(() -> seekBar.setProgress(...));
+7. Зацикливание аудио: mediaPlayer.setLooping(true); или в MediaPlayer из ресурсов после создания вызвать этот метод.
+8. Разрешения для медиа:
+Android ≤ 10: android.permission.READ_EXTERNAL_STORAGE
+Android ≥ 10 (Scoped Storage): android.permission.READ_MEDIA_AUDIO, READ_MEDIA_VIDEO, READ_MEDIA_IMAGES
+Android ≤ 4.4 и запись: WRITE_EXTERNAL_STORAGE
